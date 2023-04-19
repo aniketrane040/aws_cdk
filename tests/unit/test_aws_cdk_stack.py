@@ -1,15 +1,18 @@
 import aws_cdk as core
+import unittest
 import aws_cdk.assertions as assertions
 
 from aws_cdk.aws_cdk_stack import AwsCdkStack
 
 # example tests. To run these tests, uncomment this file along with the example
 # resource in aws_cdk/aws_cdk_stack.py
-def test_sqs_queue_created():
-    app = core.App()
-    stack = AwsCdkStack(app, "aws-cdk")
-    template = assertions.Template.from_stack(stack)
+class TestSSMParameter(unittest.TestCase):
 
-#     template.has_resource_properties("AWS::SQS::Queue", {
-#         "VisibilityTimeout": 300
-#     })
+    def test_parameter_value(self):
+        # Replace 'my-parameter' with the name of the parameter you want to test
+        parameter_name = '/cre/arane'
+        parameter_value = self.ssm.get_parameter(Name=parameter_name)['Parameter']['Value']
+        self.assertEqual(parameter_value, 'unittest_testing')
+
+if __name__ == '__main__':
+    unittest.main()
